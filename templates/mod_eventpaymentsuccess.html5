@@ -1,0 +1,149 @@
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+
+<?php if ($this->paypalMsg): ?>
+<div>
+	<tr>
+	 <td align=right><span style="text-align:left;color:red;"><?php echo $this->paypalMsg;?></span><br/><br/></td>
+	</tr>
+</div>
+<?php endif; ?>
+
+<br/>
+
+<div>
+	<tr>
+		<td align=right>PayPal Error Code:</td>
+		<td align=left><?php echo $this->transactionDetails['L_ERRORCODE0']; ?></td>
+	</tr>
+</div>
+
+<div>
+	<tr>
+		<td align=right>PayPal Severity Code:</td>
+		<td align=left><?php echo $this->transactionDetails['L_SEVERITYCODE0']; ?></td>
+	</tr>
+</div>
+
+<div>
+	<tr>
+		<td align=right>PayPal Short Message:</td>
+		<td align=left><?php echo $this->transactionDetails['L_SHORTMESSAGE0']; ?></td>
+	</tr>
+</div>
+
+<div>
+	<tr>
+		<td align=right>PayPal Long Message:</td>
+		<td align=left><?php echo $this->transactionDetails['L_LONGMESSAGE0']; ?></td>
+	</tr>
+</div>
+
+<br/>
+
+
+<div>
+	<tr>
+		<td align=right>First name:</td>
+		<td align=left><?php echo $this->userFirstName; ?></td>
+	</tr>
+</div>
+<div>
+	<tr>
+		<td align=right>Last name:</td>
+		<td align=left><?php echo $this->userLastName; ?></td>
+	</tr>
+</div>
+<div>
+	<tr>
+		<td align=right>Email:</td>
+		<td align=left><?php echo $this->userEmail; ?></td>
+	</tr>
+</div>
+<br/>
+
+<div>
+	<tr>
+		<td align=right>Order time:</td>
+		<td align=left><?php echo $this->orderTime; ?></td>
+	</tr>
+</div>
+<div>
+	<tr>
+		<td align=right>Transaction type:</td>
+		<td align=left><?php echo $this->transactionType; ?></td>
+	</tr>
+</div>
+<div>
+	<tr>
+		<td align=right>Order number:</td>
+		<td align=left><?php echo $this->orderNum; ?></td>
+	</tr>
+</div>
+<div>
+	<tr>
+		<td align=right>Payment type:</td>
+		<td align=left><?php echo $this->paymentType; ?></td>
+	</tr>
+</div>
+<div>
+	<tr>
+		<td align=right>Payment amount:</td>
+		<td align=left><?php echo $this->amount; ?>&nbsp;<?php echo $this->currencyCode; ?></td>
+	</tr>
+</div>
+<div>
+	<tr>
+		<td align=right>Payment status:</td>
+		<td align=left><?php echo $this->paymentStatus; ?></td>
+	</tr>
+</div>
+
+
+<?php if ($this->ItemLabel): ?>
+<div>
+	<tr>
+		<td align=right>Subcription Name:</td>
+		<td align=left><?php echo $this->ItemLabel; ?></td>
+	</tr>
+</div>
+<div>
+	<tr>
+		<td align=right>Subcription Details:</td>
+		<td align=left><?php echo $this->ItemDescription; ?></td>
+	</tr>
+</div>
+<div>
+	<tr>
+		<td align=right>Subcription ID:</td>
+		<td align=left><?php echo $this->SubcriptionID; ?></td>
+	</tr>
+</div>
+<div>
+	<tr>
+		<td align=right>PayPal Payer ID:</td>
+		<td align=left><?php echo $this->payerID; ?><br/><br/><br/></td>
+	</tr>
+</div>
+<?php endif; ?>
+
+
+
+<?php if (($this->pendingReason != "None") && ($this->pendingReason != "")): ?>
+<div>
+	<tr>
+		<td align=right>Pending reason:</td>
+		<td align=left><?php echo $this->pendingReason; ?></td>
+	</tr>
+</div>
+<?php endif; ?>
+
+
+
+
+<!-- indexer::stop -->
+<p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
+<!-- indexer::continue -->
+</div>

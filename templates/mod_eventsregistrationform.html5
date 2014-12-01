@@ -1,0 +1,38 @@
+	<tr class="tr_class">
+			<td class="td5_class" colspan="2"><h1><?php echo $this->title ?></h1></td>
+			</tr>
+			
+<?php if ($this->registrationFields): ?>
+<form action="<?php echo $this->action; ?>" name="details" method="post">
+	<link rel="stylesheet" href="system/modules/calendar_eventbooking/css/evtbooking.css" type="text/css" media="all" />
+<table>
+<tbody>
+		<tr class="tr_class">
+			<td class="td5_class" colspan="2"><h2><?php echo $this->headline ?></h2></td>
+			</tr>
+	<div id="details_info"> 
+	 			<tr class="tr_class">
+			<td class="td5_class" colspan="2"><p></p></td>
+			</tr>
+
+<?php $i=0; ?>
+<?php foreach ($this->registrationFields as $strField): ?>
+	<tr class="tr_class">
+			<td class="td1_class" nowrap><?php echo $strField ?>: (*)</td>
+			   <td colspan="2" class="td2_class"><input size="30" <?php if ($strField== 'email') { echo "type=email"; } else { echo "type=text";} ?> name="<?php echo $strField ?>" value="<?php echo $this->postbackfields[$strField]; ?>" required></td>
+            </tr>
+            <?php $i++; ?>
+<?php endforeach; ?>
+
+     </div> 
+ <input type="hidden" name="FORM_SUBMIT" value="submitted" />
+ <input type="hidden" name="eventID" value="<?php echo $this->eventID;?>" />
+		<div id="submit">
+     <tr class="tr_class">
+			<td class="td1_class" style="display:inline-block; width:180px;padding-top:20px"><?php echo $this->submitError;?></td>
+			   <td colspan="2" class="td2_class" style="padding-top:10px;text-align:right;padding-right:135px;"><input type="submit" name="submit" value="Book" class="submit"></td>
+            </tr>
+   </tbody>
+        </table>   
+</form>  
+<?php endif; ?>

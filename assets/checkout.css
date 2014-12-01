@@ -1,0 +1,46 @@
+/* Style sheet checkout */
+#products_list{list-style : none;}
+#title_header{padding-bottom:3px;font-family:Tahoma;font-weight:bold;font-size:1.2em;color:#0D6680;font-style: normal;}
+#title_instructions{padding-bottom:3px;}
+/*#products_header, #payment_types_header, #cc_info_header, #billing_address_header {background: none repeat scroll 0 0 #EEEEEE;border: 1px solid #DDDDDD;color: #333333;font-weight: bold;padding: 9px;width: 540px;}*/
+#products_body,#payment_types_body,#cc_info_body,#billing_address_body{display:inline-block; width:100%; padding-top:8px;padding-bottom:8px;}
+#cc_info{display:inline-block;background-color:#FFFFFF;visibility:visible;width:100%;position:relative;}
+#billing_address{display:inline-block;background-color:#FFFFFF;visibility:visible; width:100%;}
+.table_class{width:100%;text-align:left;}
+.tr_class{text-align:left;}
+.td1_class{width:120px;padding-right:8px;text-align:right;vertical-align:top;}
+.td2_class{width:380px;text-align:left;vertical-align:top;}
+.td3_class{width:50px;text-align:left;vertical-align:top;}
+.td4_class{width:330px;text-align:left;vertical-align:top;}
+#submit{clear:both;padding-top:5px;padding-left:5px;padding-right:180px;text-align:right;}
+#inner_table{width:370px;text-align:left;}
+.inner_td1_class{width:135px;text-align:left;vertical-align:top;float:left;}
+.inner_td2_class{width:170px;padding-left:5px;text-align:left;vertical-align:top;}
+.inner_td3_class{width:135px;padding-left:5px;text-align:right;vertical-align:top;float:left;}
+.inner_td4_class{width:50px;padding-left:5px;text-align:left;vertical-align:top;}
+.inner_td5_class{width:120px;padding-left:5px;text-align:left;vertical-align:top;}
+#payment_types_body{padding-top:15px;padding-bottom:15px;}
+#payment_types_body label {float:left;padding-right:10px;padding-top:12px;}
+.input {color:#000000;}
+.ppsInput {float:left;margin-top:5px;clear:both;width:30px;}
+.mod_eventpaymentcheckout input, .mod_eventpaymentcheckout select {margin-bottom:10px;}
+#payment_types label {display: inline; float: left; margin-bottom: 1.5em; line-height:1em;margin-left:0.5em;}
+#payment_types_header {clear:both;margin-bottom:2em;}
+#payment_types {display: inline-block; min-height: 140px; position:relative; width:100%;}
+#event-payment-checkout h2 {margin-bottom:15px;}
+#event-payment-checkout .title {margin-bottom:15px;}
+#products_list {list-style-type:none; padding:0; margin:0;}
+.mod_eventpaymentcheckout label {display:block; width:12em; float:left; line-height:1.8em;}
+.mod_eventpaymentcheckout input, .mod_eventpaymentcheckout select { float: left; max-width: 30em;}
+.mod_eventpaymentcheckout #details_info { display:inline-block; width:100%; padding:0;}
+.mod_eventpaymentcheckout img { float: right; position: absolute; right: 0; top: 0.25em; width: auto;}
+.mod_eventpaymentcheckout #cc_info_body label {	width:100%; max-width:23em;}
+.mod_eventpaymentcheckout input.small, .mod_eventpaymentcheckout select.small { width:5em; margin-right:0.5em;}
+.mod_eventpaymentcheckout #products,
+.mod_eventpaymentcheckout #personal,
+.mod_eventpaymentcheckout #billing_info,
+.mod_eventpaymentcheckout #payment_types,
+.mod_eventpaymentcheckout #cc_info,
+.mod_eventpaymentcheckout #billing_address {
+	margin-bottom:2em;
+}

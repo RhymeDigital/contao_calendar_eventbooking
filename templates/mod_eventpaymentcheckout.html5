@@ -1,0 +1,336 @@
+<link rel="stylesheet" type="text/css" href="{{env::path}}<?php echo $this->subdir;?>assets/checkout.css" media="screen" />
+<script type="text/javascript" src="{{env::path}}<?php echo $this->subdir;?>assets/checkout.js"></script>
+<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+<div class="title">
+<h1>Booking Information</h1> <span style="text-align:left;color:red;"><?php echo $this->submitError;?></span>
+</div>
+
+<div id="products">
+	<h2>Items</h2>
+	<div id="products_body">
+		<ul id="products_list">
+			<li><?php echo $this->product_desc;?>: &pound;<?php echo $this->amount;?></li>
+		</ul>
+	</div>
+</div>
+
+<div id="personal">
+	<h2>Personal</h2>
+	<?php if ($this->registrationFields): ?>
+		<form name="checkout_form" action="<?php echo $this->action; ?>" method="post" enctype="multipart/form-data">
+			<div id="details_info">
+				<?php $i=0; ?>
+				<?php foreach ($this->registrationFields as $strField): ?>
+				<?php $thisfieldID = '"fieldid_'.$i.'"';  ?>
+				<label for=<?php echo $thisfieldID; ?>><?php  
+				$thisfield = $strField;
+				$thisfield = str_replace("firstname", "first name", $thisfield);
+				$thisfield = str_replace("lastname", "last name", $thisfield);
+				$thisfield = str_replace("addressOne", "Address 1", $thisfield);
+				$thisfield = str_replace("addressTwo", "Address 2", $thisfield);
+				$thisfield = str_replace("dateOfBirth", "Date Of Birth", $thisfield);
+				$thisfield = str_replace("city", "Town/City", $thisfield);
+				$thisfield = str_replace("company", "Company Name", $thisfield);
+				$thisfield = str_replace("title", "Title", $thisfield);
+				$thisfield = str_replace("jobTitle", "Job Title", $thisfield);
+				$thisfield = str_replace("gmcNumber", "GMC Number", $thisfield);
+				$thisfield = str_replace("dietaryRequirements", "Dietary Requirements", $thisfield);
+				$thisfield = str_replace("disabilities", "Disabilities", $thisfield);
+				echo ucfirst($thisfield)  ?>: (*)</label>
+				
+				<?php if ($thisfield == "dinner" || $thisfield == "transport"): ?>
+				<select name="<?php echo $strField ?>" id=<?php echo $thisfieldID; ?>>
+				<option value="No">No</option>
+				<option value="Yes">Yes</option>
+				</select>
+				<?php else: ?>
+				<input size="30" <?php if ($strField== 'email') { echo "type=email"; } else { echo "type=text";} ?> name="<?php echo $strField ?>" value="<?php echo $this->postbackfields[$strField]; ?>" id=<?php echo $thisfieldID; ?> required>
+				<?php endif; ?>
+				<?php $i++; ?><br>
+				<?php endforeach; ?>
+			</div>
+			<input type="hidden" name="eventID" value="<?php echo $this->eventID;?>" />
+	<?php endif; ?>
+</div>
+
+<div id="billing_info">
+	<div class="title">
+		<h2>Billing Information</h2>
+		<div id="title_instructions">Please complete payment info below and click submit payment.</div>
+	</div>
+</div>
+
+<div id="payment_types">
+	<div class="title">
+      <h2>Payment</h2>
+	   <img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" align="left" border="0" />
+    </div>
+    
+		<div id="payment_types_header">Please choose a payment:</div>
+			<?php for ( $counter = 1; $counter <= count($this->paymenttypes); $counter ++) { ?>
+				<?php $thispayfieldID = '"fieldpayid_'.$counter.'"';  ?>
+				<input class="ppsInput" name="payment_method" value="<?php echo $this->paymenttypes[$counter-1][type]; ?>"  onclick='javascript:changePage("<?php echo $this->paymenttypes[$counter-1][type]; ?>");' type="Radio" id=<?php echo $thispayfieldID; ?>> 
+		   		<?php echo '<label for='.$thispayfieldID.' id='.$thispayfieldID.'>'.$this->paymenttypes[$counter-1][label].'</label>';?>
+		   <?php } ?>
+	</div>
+
+<div style="display: none;" id="cc_info">
+		<div class="title">
+		<h2>Credit or Debit Card Information</h2>
+		<img src="{{env::path}}<?php echo $this->subdir;?>assets/paypalpro.gif" border="0" /></div>
+		<div id="cc_info_body">
+			<input value="Sale" name="PaymentAction" type="hidden">
+			<label>Credit Card Type: (*)</label>
+				<select name="CreditCardType">
+					<?php for ($i=0; $i<count($this->ccTypes); $i++){ ?>
+						 <option 
+						 <?php if ($this->CreditCardType == $this->ccTypes[$i]) { echo 'selected="Selected" '; }?>
+						 value=<?php echo '"'.$this->ccTypes[$i].'"';?>><?php echo $this->ccTypes[$i];?></option>
+          <?php  } ?>
+					</select>
+					
+					<div class="clear">[nbsp]</div>
+
+				   <label for="BillingFirstName">Name on Card: (*)</label>
+            <input type="text" id="BillingFirstName" name="BillingFirstName" value="<?php echo $this->BillingFirstName;?>">
+
+					<div class="clear">[nbsp]</div>
+					
+			<label for="cardNumber">Credit Card Number: (*)</label>
+            <input type="text" pattern="[0-9]{13,16}" id="cardNumber" name="CreditCardNumber" autocomplete="off" value="<?php echo $this->CreditCardNumber;?>">
+            
+			<div class="clear">[nbsp]</div>
+			
+			<label for="securityCode">Security Code: <span class="cvv">(last 3 digit # on back of card)</span> (*)</label>
+				<input type="text" id="securityCode" class="small" name="CVV2" autocomplete="off" value="<?php echo $this->CVV2;?>">
+                
+                
+                <div class="clear">[nbsp]</div>
+          		
+					<label for="IssueNumber">Issue Number: (Maestro only)</label>
+					<input type="text" autocomplete="off" name="IssueNumber" id="IssueNumber" class="small" value="<?php echo $this->IssueNumber;?>" class="issue">
+		    
+			<div class="clear">[nbsp]</div>
+                
+			<label for="expiryDate">Expiry Date (*)</label>
+					<select id="expiryDate" name="ExpMonth" class="small">
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+					<select name="ExpYear" class="small">
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+						<option value="2017">2017</option>
+						<option value="2018">2018</option>
+						<option value="2019">2019</option>
+						<option value="2020">2020</option>
+						<option value="2021">2021</option>
+						<option value="2022">2022</option>
+						<option value="2023">2023</option>
+					</select>
+		</div>
+</div>
+
+<div style="display: none;" id="billing_address">
+	<div class="title"><h2>Billing Address (must be card holder's address)</h2></div>
+	<div id="billing_address_body">
+		<label for="BillingStreet1">Address Line 1: (*)</label>
+		<input type="text" id="BillingStreet1" name="BillingStreet1" value="<?php echo $this->BillingStreet1;?>">
+		
+		<div class="clear">[nbsp]</div>
+		
+		<label for="BillingStreet2">Address Line 2:</label>
+        <input type="text" id="BillingStreet2" name="BillingStreet2" value="<?php echo $this->BillingStreet2;?>">
+		
+		<div class="clear">[nbsp]</div>
+		
+        <label for="BillingCityName">Town/City: (*)</label>
+		<input type="text" id="BillingCityName" name="BillingCityName" size="25" value="<?php echo $this->BillingCityName;?>">
+		
+		<div class="clear">[nbsp]</div>
+		
+        <label for="BillingPostalCode">Postcode: (*)</label>
+        <input type="text" pattern="[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}" id="BillingPostalCode" name="BillingPostalCode" size="25" value="<?php echo $this->BillingPostalCode;?>" onblur="this.value=this.value.toUpperCase()">
+		
+		<div class="clear">[nbsp]</div>
+		
+        <label for="BillingStateOrProvince">County:</label>
+		<select id="BillingStateOrProvince" name="BillingStateOrProvince">
+                <option  value=""></option>
+				<optgroup label="England">
+				<option>Bedfordshire</option>
+				<option>Berkshire</option>
+				<option>Bristol</option>
+				<option>Buckinghamshire</option>
+				<option>Cambridgeshire</option>
+				<option>Cheshire</option>
+				<option>City of London</option>
+				<option>Cornwall</option>
+				<option>Cumbria</option>
+				<option>Derbyshire</option>
+				<option>Devon</option>
+				<option>Dorset</option>
+				<option>Durham</option>
+				<option>East Riding of Yorkshire</option>
+				<option>East Sussex</option>
+				<option>Essex</option>
+				<option>Gloucestershire</option>
+				<option>Greater London</option>
+				<option>Greater Manchester</option>
+				<option>Hampshire</option>
+				<option>Herefordshire</option>
+				<option>Hertfordshire</option>
+				<option>Isle of Wight</option>
+				<option>Kent</option>
+				<option>Lancashire</option>
+				<option>Leicestershire</option>
+				<option>Lincolnshire</option>
+				<option>Merseyside</option>
+				<option>Norfolk</option>
+				<option>North Yorkshire</option>
+				<option>Northamptonshire</option>
+				<option>Northumberland</option>
+				<option>Nottinghamshire</option>
+				<option>Oxfordshire</option>
+				<option>Rutland</option>
+				<option>Shropshire</option>
+				<option>Somerset</option>
+				<option>South Yorkshire</option>
+				<option>Staffordshire</option>
+				<option>Suffolk</option>
+				<option>Surrey</option>
+				<option>Tyne and Wear</option>
+				<option>Warwickshire</option>
+				<option>West Midlands</option>
+				<option>West Sussex</option>
+				<option>West Yorkshire</option>
+				<option>Wiltshire</option>
+				<option>Worcestershire</option>
+				</optgroup>
+				<optgroup label="Scotland">
+				<option>Aberdeenshire</option>
+				<option>Angus</option>
+				<option>Argyllshire</option>
+				<option>Ayrshire</option>
+				<option>Banffshire</option>
+				<option>Berwickshire</option>
+				<option>Buteshire</option>
+				<option>Cromartyshire</option>
+				<option>Caithness</option>
+				<option>Clackmannanshire</option>
+				<option>Dumfriesshire</option>
+				<option>Dunbartonshire</option>
+				<option>East Lothian</option>
+				<option>Fife</option>
+				<option>Inverness-shire</option>
+				<option>Kincardineshire</option>
+				<option>Kinross</option>
+				<option>Kirkcudbrightshire</option>
+				<option>Lanarkshire</option>
+				<option>Midlothian</option>
+				<option>Morayshire</option>
+				<option>Nairnshire</option>
+				<option>Orkney</option>
+				<option>Peeblesshire</option>
+				<option>Perthshire</option>
+				<option>Renfrewshire</option>
+				<option>Ross-shire</option>
+				<option>Roxburghshire</option>
+				<option>Selkirkshire</option>
+				<option>Shetland</option>
+				<option>Stirlingshire</option>
+				<option>Sutherland</option>
+				<option>West Lothian</option>
+				<option>Wigtownshire</option>
+				</optgroup>
+				<optgroup label="Wales">
+				<option>Anglesey</option>
+				<option>Brecknockshire</option>
+		</select>
+		
+		<div class="clear">[nbsp]</div>
+		
+<label for="BillingCountry">Country</label>
+		<select id="BillingCountry" name="BillingCountry">
+                  <option value="US">United States</option>
+                  <option value="AI">Anguilla</option>
+                  <option value="AR">Argentina</option>
+                  <option value="AU">Australia</option>
+                  <option value="AT">Austria</option>
+                  <option value="BE">Belgium</option>
+                  <option value="BR">Brazil</option>
+                  <option value="CA">Canada</option>
+                  <option value="CL">Chile</option>
+                  <option value="C2">China</option>
+                  <option value="CR">Costa Rica</option>
+                  <option value="CY">Cyprus</option>
+                  <option value="CZ">Czech Republic</option>
+                  <option value="DK">Denmark</option>
+                  <option value="DO">Dominican Republic</option>
+                  <option value="EC">Ecuador</option>
+                  <option value="EE">Estonia</option>
+                  <option value="FI">Finland</option>
+                  <option value="FR">France</option>
+                  <option value="DE">Germany</option>
+                  <option value="GR">Greece</option>
+                  <option value="HK">Hong Kong</option>
+                  <option value="HU">Hungary</option>
+                  <option value="IS">Iceland</option>
+                  <option value="IN">India</option>
+                  <option value="IE">Ireland</option>
+                  <option value="IL">Israel</option>
+                  <option value="IT">Italy</option>
+                  <option value="JM">Jamaica</option>
+                  <option value="JP">Japan</option>
+                  <option value="LV">Latvia</option>
+                  <option value="LT">Lithuania</option>
+                  <option value="LU">Luxembourg</option>
+                  <option value="MY">Malaysia</option>
+                  <option value="MT">Malta</option>
+                  <option value="MX">Mexico</option>
+                  <option value="NL">Netherlands</option>
+                  <option value="NZ">New Zealand</option>
+                  <option value="NO">Norway</option>
+                  <option value="PL">Poland</option>
+                  <option value="PT">Portugal</option>
+                  <option value="SG">Singapore</option>
+                  <option value="SK">Slovakia</option>
+                  <option value="SI">Slovenia</option>
+                  <option value="ZA">South Africa</option>
+                  <option value="KR">South Korea</option>
+                  <option value="ES">Spain</option>
+                  <option value="SE">Sweden</option>
+                  <option value="CH">Switzerland</option>
+                  <option value="TW">Taiwan</option>
+                  <option value="TH">Thailand</option>
+                  <option value="TR">Turkey</option>
+                  <option value="GB" selected="selected">United Kingdom</option>
+                  <option value="UY">Uruguay</option>
+                  <option value="VE">Venezuela</option>
+		</select>
+		
+    </div>
+</div>
+<input type="hidden" name="FORM_SUBMIT" value="checkout" />
+	<div id="submit">
+		<input type="submit" class="submit" value="<?php echo $this->submit;?>" onclick="this.form.submit();">
+	</div>
+</form>
+</div>
+<!-- indexer::stop -->
+<p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
+<!-- indexer::continue -->

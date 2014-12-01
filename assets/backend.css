@@ -1,0 +1,10 @@
+.header_calendar_eventbooking_tools{background-image:url(tools.png);background-position:left center;background-repeat:no-repeat;padding:2px 0 3px 20px}
+.header_import_assets{background-image:url(assets.gif);background-position:left center;background-repeat:no-repeat;padding:2px 0 3px 20px}
+.header_export_emails{background-image:url(export.png);background-position:left center;background-repeat:no-repeat;padding:2px 0 3px 20px}
+.w50h{height:auto}
+.tl_tree .tl_left a{float:left;margin-top:10px}
+.tl_tree .tl_right{height:auto;text-align:right}
+h3.inherit,.tl_checkbox_single_container.inherit{background-color:#f8f8f8;margin:14px 0 1px;padding:2px 2px 2px 0}
+#calendar_eventbookingtoolsmenu,#calendar_eventbooking-contextmenu{display:none;position:absolute;z-index:99999999;background-color:#fff;border:1px solid #ccc;-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;padding:3px 6px}
+#calendar_eventbookingtoolsmenu a,#calendar_eventbooking-contextmenu a{display:block;padding-top:3px;white-space:nowrap}
+#calendar_eventbookingtoolsmenu img,#calendar_eventbooking-contextmenu img{padding-bottom:1px;vertical-align:middle}

@@ -1,0 +1,35 @@
+<div class="group event layout_teaser<?php echo $this->classList; ?>">
+
+<div class="col span_1_of_6">
+<div class="newsCal">
+<span class="newsMonth"><?php echo date("M", $this->startDate); ?> <?php echo date("Y", $this->startDate); ?></span>
+<span class="newsDate"><?php echo date("d", $this->startDate); ?></span>
+</div>
+</div>
+
+<div class="col span_5_of_6">
+  <?php if ($this->details): ?>
+<h2><a href="<?php echo $this->link; ?>" title="<?php echo $this->title; ?> (<?php if ($this->day): echo $this->day; ?>, <?php endif; echo $this->date; if ($this->time): ?>, <?php echo $this->time; endif;?>)"<?php echo $this->target; ?>><?php echo $this->title; ?></a></h2>
+  <?php else: ?>
+    <h2><?php echo $this->title; ?></h2>
+  <?php endif; ?>
+  
+	<?php if ($this->header): ?>
+	  <p class="info">
+		<span class="dateSmall"><?php echo date("d/m/Y", $this->startDate); ?></span>		
+		<p><?php echo "Event Spaces Remaining: " . $this->spacesRemaining."/".$this->availableSpaces; ?><br />
+		<?php echo "Booking Closing Date: " . $this->lastBookingDate; ?></p>
+		
+	  </p>
+	<?php endif; ?>
+
+  <div class="teaser">
+    <?php echo $this->teaser; ?>
+  </div>
+
+  <?php if ($this->details): ?>
+    <p class="more"><a href="<?php echo $this->href; ?>" title="<?php echo $this->readMore; ?>"<?php echo $this->target; ?>><?php echo $this->more; ?> <span class="invisible"><?php echo $this->link; ?></span></a></p>
+  <?php endif; ?>
+
+</div>
+</div>

@@ -1,0 +1,36 @@
+<!-- indexer::stop -->
+<style TYPE="text/css"> 
+	.cert, .survey {text-align:center;}
+	.cert img, .survey img { margin-top:-8px; }
+	
+	#your-surveys table tr  { margin-top: 6px; }
+	
+</style> 
+<div class="<?php echo $this->class; ?><?php if (!$this->tableless): ?> tableform<?php endif; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+
+<p>Events Attended by: <?php echo $this->firstname.' '.$this->lastname; ?></p>
+
+		<br>
+	<table>
+		<tr class="header">
+			<th class="date"><?php echo $this->dateLabel; ?></th>
+			<th class="title"><?php echo $this->titleLabel; ?></th>
+			<th class="survey"><?php echo $this->surveyLabel; ?></th>
+			<th class="cert"><?php echo $this->certLabel; ?></th>
+		</tr>
+	<?php foreach($this->events as $events ): ?>
+		<tr>
+			<td class="date"><?php echo $events['date']; ?></td>
+			<td class="title"><?php echo str_replace(",","",$events['coursename']);?></td>
+			<td class="survey"><?php if (($events['surveyid']) && ($events['finished'] == 0)): ?><a href="<?php echo $events['surveylink']; ?>"><img src="system/modules/calendar_eventbooking/assets/survey.jpg" title="Take survey" alt="Take survey"></a><?php endif; ?></td>
+			<td class="cert"><?php if (($events['certid']) && ($events['finished'] == 1)): ?><a href="<?php echo $events['certlink']; ?>"><img src="system/modules/calendar_eventbooking/assets/dpdf.jpg" title="Download certificate" alt="Download certificate"></a><?php endif; ?></td>
+		</tr>
+	<?php endforeach; ?>
+</table>
+
+<!-- indexer::stop -->
+</div>

@@ -1,0 +1,27 @@
+<h1><?php echo $this->title ?></h1>
+<?php if ($this->registrationFields): ?>
+<form action="<?php echo $this->action; ?>" name="details" method="post">
+ <link rel="stylesheet" href="system/modules/calendar_eventbooking/css/evtbooking.css" type="text/css" media="all" />
+<h2>Book a place on this event</h2>
+
+ <div id="details_info"> 
+<?php $i=0; ?>
+<?php foreach ($this->registrationFields as $strField): ?>
+<div class="col span_1_of_2">
+<label for="<?php echo $strField ?>"><?php echo ucfirst($strField) ?>: <?php if (in_array($strField, $this->evtreg_mandatory)) { echo '<span class="mandatory">*</span>';}?></label>
+<input <?php if ($strField== 'email') { echo "type=email"; } else { echo "type=text";} ?> size="30" name="<?php echo $strField ?>" value="<?php echo $this->postbackfields[$strField]; ?>" id="<?php echo $strField ?>" <?php if (in_array($strField, $this->evtreg_mandatory)) { echo "required"; }?>>
+</div>
+            <?php $i++; ?>
+<?php endforeach; ?>
+
+     </div> 
+ <input type="hidden" name="FORM_SUBMIT" value="submitted" />
+ <input type="hidden" name="eventID" value="<?php echo $this->eventID;?>" />
+  <div id="submit">
+<?php echo $this->submitError;?></td>
+<input type="submit" name="submit" value="Book" class="submit">
+  </div>
+</form>  
+<?php endif; ?>
+
+

@@ -1,0 +1,62 @@
+<style>
+
+h1, h2, h3, h4, h5, h6 {
+  color:#666966;
+  font-size:12px;
+}
+
+#tl_moverview h2 {
+  background-color:#F6F6F6;
+  background-position:initial initial;
+  background-repeat:initial initial;
+  border-top-color:#E9E9E9;
+  border-top-style:solid;
+  border-top-width:1px;
+  margin:18px 0 0;
+  padding:2px 6px 3px;
+}
+
+#tl_moverview .tl_module_desc h3 {
+  margin:0 0 4px;
+  padding:0;
+}
+
+#tl_moverview .tl_module_desc {
+  background-color:#FFFFFF;
+  background-position:initial initial;
+  background-repeat:initial initial;
+  border-top-color:#E9E9E9;
+  border-top-style:solid;
+  border-top-width:1px;
+  padding:8px 6px;
+}
+
+a, body, div, label, li, ol, p, td, th, ul, fieldset, form, input, optgroup, select, textarea {
+  color:#666966;
+  font-size:11px;
+}
+
+a, b, body, cite, div, em, h1, h2, h3, h4, h5, h6, i, label, li, ol, p, strong, td, th, u, ul {
+  font-family:Verdana, sans-serif;
+}
+
+</style>
+
+<h1 id="tl_welcome"><?php echo $this->welcome; ?></h1>
+
+<div id="tl_soverview">
+
+<div id="tl_moverview">
+<?php foreach ($this->arrGroups as $strGroup=>$arrModules): ?>
+
+<h2><?php echo $strGroup; ?></h2>
+<?php foreach ($arrModules as $strModule=>$arrModule): ?>
+
+<div class="tl_module_desc">
+<h3><a href="<?php echo $this->script; ?>?do=booking_setup&table=<?php echo $strModule; ?>" class="navigation <?php echo $strModule; ?>"<?php if ($arrModule['icon']): ?> style="background-image:url('<?php echo $arrModule['icon']; ?>')"<?php endif; ?>><?php echo $arrModule['name']; ?></a></h3>
+<?php echo $arrModule['description']; ?> 
+</div>
+<?php endforeach; endforeach; ?>
+</div>
+
+</div>
